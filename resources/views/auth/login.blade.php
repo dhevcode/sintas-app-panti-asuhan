@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>SINTAS Admin - Login</title>
+    <title>CareHub Admin - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
                 <div class="w-16 h-16 bg-blue-600 rounded-3xl mx-auto flex items-center justify-center text-white shadow-xl shadow-blue-200 mb-4">
                     <i data-lucide="layout-dashboard" size="32"></i>
                 </div>
-                <h1 class="text-3xl font-black text-slate-800 tracking-tighter">SINTAS <span class="text-blue-600">Admin</span></h1>
+                <h1 class="text-3xl font-black text-slate-800 tracking-tighter">CareHub <span class="text-blue-600">Admin</span></h1>
                 <p class="text-gray-400 font-bold text-xs uppercase tracking-widest">Sistem Manajemen Terpadu</p>
             </div>
 

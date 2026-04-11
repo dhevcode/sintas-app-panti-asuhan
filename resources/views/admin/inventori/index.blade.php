@@ -34,7 +34,7 @@
                         <i data-lucide="edit-3" size="14"></i> Edit
                     </button>
                     
-                    <form action="{{ route('inventori.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini dari SINTAS?')">
+                    <form action="{{ route('inventori.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini dari CareHub?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="flex items-center gap-1.5 text-rose-400 font-black text-[10px] uppercase tracking-widest hover:text-rose-600 transition-colors">
                             <i data-lucide="trash-2" size="14"></i> Hapus
@@ -52,7 +52,7 @@
         
         <div class="text-center">
             <h3 class="font-black text-gray-800 uppercase text-xs tracking-[0.2em]">Tambah Logistik Baru</h3>
-            <p class="text-[10px] text-gray-400 font-bold mt-1">SINTAS INVENTORY SYSTEM</p>
+            <p class="text-[10px] text-gray-400 font-bold mt-1">CareHub INVENTORY SYSTEM</p>
         </div>
 
         <form id="formInventori" action="{{ route('inventori.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -62,7 +62,7 @@
 
             <div class="text-center">
                 <h3 id="modalTitle" class="font-black text-gray-800 uppercase text-xs tracking-[0.2em]">Tambah Logistik Baru</h3>
-                <p class="text-[10px] text-gray-400 font-bold mt-1">SINTAS INVENTORY SYSTEM</p>
+                <p class="text-[10px] text-gray-400 font-bold mt-1">CareHub INVENTORY SYSTEM</p>
             </div>
             
             <div class="space-y-1">

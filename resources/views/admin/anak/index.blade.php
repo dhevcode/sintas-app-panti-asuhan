@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Anak - SINTAS')
+@section('title', 'Manajemen Anak - CareHub')
 
 @section('content')
 <div class="space-y-6">
     <div class="flex justify-between items-center bg-white p-8 rounded-[2rem] border shadow-sm">
         <div>
             <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">Database Anak Asuh</h3>
-            <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Total: {{ $children->count() }} Anak di SINTAS</p>
+            <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Total: {{ $children->count() }} Anak di CareHub</p>
         </div>
         <button onclick="openModalTambah()" class="bg-blue-600 text-white px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-blue-700 transition-all">+ Anak Baru</button>
     </div>
@@ -48,7 +48,7 @@
                             <button onclick="editAnak({{ $c->id }})" class="p-2 text-blue-400 hover:text-blue-600 transition-colors">
                                 <i data-lucide="edit-3" size="18"></i>
                             </button>
-                            <form action="{{ route('anak.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Hapus profil ini dari SINTAS?')">
+                            <form action="{{ route('anak.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Hapus profil ini dari CareHub?')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="p-2 text-rose-300 hover:text-rose-600 transition-colors">
                                     <i data-lucide="trash-2" size="18"></i>
@@ -82,7 +82,7 @@
 
             <div class="text-center mb-2">
                 <h3 id="modalTitle" class="font-black text-gray-800 uppercase text-xs tracking-widest">Tambah Anak Baru</h3>
-                <p class="text-[10px] text-gray-400 font-bold mt-1">SINTAS DATABASE SYSTEM</p>
+                <p class="text-[10px] text-gray-400 font-bold mt-1">CareHub DATABASE SYSTEM</p>
             </div>
             
             <div class="space-y-1">
@@ -120,7 +120,7 @@
             </div>
 
             <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all active:scale-[0.98]">
-                Simpan Data di SINTAS
+                Simpan Data di CareHub
             </button>
         </form>
     </div>

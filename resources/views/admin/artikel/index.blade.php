@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'CMS Artikel - SINTAS')
+@section('title', 'CMS Artikel - CareHub')
 
 @section('content')
 <div class="space-y-6">
@@ -9,7 +9,7 @@
             <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">Content Management</h3>
             <p class="text-xs text-gray-500 mt-1 uppercase font-bold tracking-widest">Kelola Berita & Kegiatan Panti</p>
         </div>
-        <button onclick="openModal()" class="bg-blue-600 text-white px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-blue-700 transition-all">+ Tulis Artikel</button>
+        <button onclick="openModalTambah()" class="bg-blue-600 text-white px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-blue-700 transition-all">+ Tulis Artikel</button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -32,7 +32,8 @@
                 <p class="text-gray-500 text-xs leading-relaxed line-clamp-3 mb-6">{{ Str::limit(strip_tags($a->konten), 120) }}</p>
                 
                 <div class="mt-auto pt-6 border-t border-gray-50 flex justify-between items-center">
-                    <button class="text-[10px] font-black uppercase text-blue-500 hover:text-blue-700">Edit</button>
+                    <button type="button" onclick="editArtikel({{ $a->id }})" class="text-[10px] font-black uppercase text-blue-500 hover:text-blue-700">Edit</button>
+                    
                     <form action="{{ route('artikel.destroy', $a->id) }}" method="POST" onsubmit="return confirm('Hapus artikel ini?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="text-[10px] font-black uppercase text-rose-400 hover:text-rose-600">Hapus</button>
@@ -52,12 +53,15 @@
 <div id="modalArtikel" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
     <div class="bg-white w-full max-w-2xl rounded-[2.5rem] p-10 shadow-2xl animate-zoomIn overflow-y-auto max-h-[90vh]">
         <div class="text-center mb-8">
-            <h3 class="font-black text-gray-800 uppercase text-xs tracking-[0.2em]">Buat Artikel Baru</h3>
-            <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">SINTAS CMS ENGINE</p>
+            <h3 id="modalTitle" class="font-black text-gray-800 uppercase text-xs tracking-[0.2em]">Buat Artikel Baru</h3>
+            <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">CareHub CMS ENGINE</p>
         </div>
 
-        <form action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <form id="formArtikel" action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
+            
+            <div id="methodField"></div>
+
             <div class="space-y-1">
                 <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Judul Artikel</label>
                 <input type="text" name="judul" placeholder="Masukkan judul yang menarik..." 
@@ -75,10 +79,11 @@
                 <div class="border-2 border-dashed border-gray-100 rounded-2xl p-6 bg-gray-50/50 text-center">
                     <input type="file" name="gambar" class="text-[10px] font-black uppercase text-gray-400">
                 </div>
+                <p class="text-[9px] text-gray-400 ml-1 italic">*Biarkan kosong jika tidak ingin mengubah gambar (saat edit)</p>
             </div>
 
             <div class="pt-4 flex flex-col gap-3">
-                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all">Publish Artikel</button>
+                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all">Simpan Artikel</button>
                 <button type="button" onclick="closeModal()" class="w-full text-gray-300 text-[9px] font-black uppercase tracking-widest hover:text-rose-500 transition-colors">Batal</button>
             </div>
         </form>
@@ -88,13 +93,45 @@
 <script>
     function openModal() {
         const modal = document.getElementById('modalArtikel');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        modal.classList.replace('hidden', 'flex');
     }
+
     function closeModal() {
         const modal = document.getElementById('modalArtikel');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+        modal.classList.replace('flex', 'hidden');
+    }
+
+    // FUNGSI BARU: Reset form untuk tambah artikel
+    function openModalTambah() {
+        const form = document.getElementById('formArtikel');
+        form.reset();
+        form.action = "{{ route('artikel.store') }}";
+        document.getElementById('methodField').innerHTML = '';
+        document.getElementById('modalTitle').innerText = 'Buat Artikel Baru';
+        openModal();
+    }
+
+    function editArtikel(id) {
+        fetch(`/artikel/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                const form = document.getElementById('formArtikel');
+                
+                form.action = `/artikel/${id}`;
+                
+                document.getElementById('methodField').innerHTML = '@method("PUT")';
+                
+                form.judul.value = data.judul;
+                form.konten.value = data.konten;
+
+                document.getElementById('modalTitle').innerText = 'Edit Artikel: ' + data.judul;
+                
+                openModal();
+            })
+            .catch(error => {
+                alert('Gagal mengambil data artikel');
+                console.error(error);
+            });
     }
 </script>
 @endsection

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SINTAS Admin - @yield('title')</title>
+    <title>CareHub Admin - @yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -24,7 +24,7 @@
                 <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                     <i data-lucide="layout-dashboard"></i>
                 </div>
-                <span class="text-2xl font-black text-white tracking-tighter">SINTAS</span>
+                <span class="text-2xl font-black text-white tracking-tighter">CareHub</span>
             </div>
 
             <nav class="flex-1 px-4 py-4 space-y-1.5 overflow-y-auto scrollbar-hide">
@@ -75,7 +75,7 @@
                     <button onclick="toggleSidebar()" class="p-2 text-slate-400 transition-colors hover:bg-gray-50 rounded-xl">
                         <i data-lucide="menu" size="20"></i>
                     </button>
-                    <h2 class="font-black text-slate-800 uppercase tracking-widest text-[10px]">SINTAS v0.1.1</h2>
+                    <h2 class="font-black text-slate-800 uppercase tracking-widest text-[10px]">CareHub v0.1.2</h2>
                 </div>
                 
                 <div class="flex items-center gap-4">

@@ -15,17 +15,16 @@ class InventoriController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'nama_barang' => 'required', // Tambahkan validasi
+            'nama_barang' => 'required', 
             'stok' => 'required|numeric',
             'satuan' => 'required',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        // Logika upload gambar...
         $path = $request->hasFile('gambar') ? $request->file('gambar')->store('inventori', 'public') : null;
 
         Inventori::create([
-            'nama_barang' => $request->nama_barang, // Menyimpan Nama Barang
+            'nama_barang' => $request->nama_barang, 
             'kategori' => $request->kategori,
             'stok' => $request->stok,
             'satuan' => $request->satuan,
@@ -39,7 +38,7 @@ class InventoriController extends Controller
     public function destroy($id) {
         $item = Inventori::findOrFail($id);
         if($item->gambar) {
-            Storage::disk('public')->delete($item->gambar); // Hapus foto dari folder
+            Storage::disk('public')->delete($item->gambar); 
         }
         $item->delete();
         return redirect()->back()->with('success', 'Barang dihapus!');

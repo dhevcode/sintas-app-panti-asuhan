@@ -34,11 +34,14 @@ Route::middleware(['auth.custom'])->group(function () {
     Route::get('/inventori', [InventoriController::class, 'index'])->name('inventori.index');
     Route::post('/inventori', [InventoriController::class, 'store'])->name('inventori.store');
     Route::get('/inventori/{id}/edit', [InventoriController::class, 'edit'])->name('inventori.edit');
+    Route::put('/inventori/{id}', [InventoriController::class, 'update'])->name('inventori.update'); 
     Route::delete('/inventori/{id}', [InventoriController::class, 'destroy'])->name('inventori.destroy');
 
-    // Route untuk Artikel
+    // CRUD Artikel
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
     Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
+    Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit'); 
+    Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update'); 
     Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
 });

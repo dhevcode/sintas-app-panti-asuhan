@@ -15,9 +15,8 @@ class AnakAsuhController extends Controller
     public function store(Request $request) {
         $request->validate([
             'nama' => 'required',
-            'tanggal_lahir' => 'required|date', // Pastikan validasi ke tanggal_lahir
+            'tanggal_lahir' => 'required|date', 
             'pendidikan' => 'required',
-            // 'umur' => 'required' <--- HAPUS baris ini jika masih ada
         ]);
 
         AnakAsuh::create($request->all());
